@@ -1,4 +1,4 @@
-# KG
+# Echarts-Knowledge Graph of Colorectal Cancer
 Echarts实现结直肠癌知识图谱可视化<br>
 <br>
 ## 项目实现流程
