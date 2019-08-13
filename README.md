@@ -8,5 +8,5 @@ Echarts实现结直肠癌知识图谱可视化<br>
 4.网页设计（前端知识）<br>
 <br>
 ## 项目演示
-演示地址：https://liuxiaocong20.github.io/KG/<br>
+演示地址：https://liuxiaocong20.github.io/Echarts-Knowledge-Graph-of-Colorectal-Cancer/<br>
 更多详情：<br>
