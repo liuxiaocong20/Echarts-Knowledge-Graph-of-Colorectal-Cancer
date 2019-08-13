@@ -20,7 +20,7 @@
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('main'));
         option = {
-            //title: { text: '结直肠癌知识图谱',textStyle:{fontSize:24},padding:[15,15,15,15]},//标题内边距
+            
             tooltip: {
                 formatter: function (x) {
                     return x.data.des;
@@ -43,40 +43,40 @@
                             }
                         }
                     },
-                    force: {//力引导图基本配置
-                        repulsion: 1700,//节点之间的斥力因子。支持数组表达斥力范围，值越大斥力越大。
-                        gravity : 0.95,//节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。
+                    force: {
+                        repulsion: 1700,
+                        gravity : 0.95,
                         edgeLength: [10, 50]
                     },
-                    draggable: true,//节点是否可拖拽，只在使用力引导布局的时候有用
-                    focusNodeAdjacency : true,//是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点
-                    itemStyle: {//===============图形样式
+                    draggable: true,
+                    focusNodeAdjacency : true,
+                    itemStyle: {
                         normal: {
                             color: '#4b565b',
-                            borderColor : 'rgba(255,215,0,0.5)',//设置图形边框为淡金色,透明度为0.4
-                            borderWidth : 2,//图形的描边线宽。为 0 时无描边。
-                            opacity : 0.99 // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
+                            borderColor : 'rgba(255,215,0,0.5)',
+                            borderWidth : 2,
+                            opacity : 0.99 
                         }
                     },
-                    lineStyle: {//==========关系边的公用线条样式
+                    lineStyle: {
                         normal: {
                             width: 2
                         }
                     },
                     edgeLabel: {
                         normal: {
-                            show: false,//是否显示边的标签
+                            show: false,
                             formatter: function (x) {
                                 return x.data.name;
                             }
                         }
                     },
-                    label: {//=============图形上的文本标签
+                    label: {
                         normal: {
-                            show: true,//是否显示标签
-                            position : 'inside',//标签的位置。['50%', '50%'] [x,y]
+                            show: true,
+                            position : 'inside',
                             textStyle: {
-                            	color : '#4b565b', //字体颜色
+                            	color : '#4b565b', 
                             	fontSize: 12
                             }
                         }
