@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ECharts 结直肠癌知识图谱</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,  minimum-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>结直肠癌知识图谱</title>
+    <meta name="viewport" content="width=1250" /> 
     <script src="jquery-1.10.2.min.js"></script>
     <script src="echarts.min.js"></script>
     <style type="text/css">
         html, body, #main { height: 100%; width: 100%; margin: 0; padding: 0 }
+        .nav{margin-left: auto; margin-right: auto; width:64px background-color: gray }
     </style>
 </head>
 <body>
-    <div id="main" style=""></div>
+	<div id="header" style=" background-color: #7986cb !important; color: #fff;">
+		<img class="logo" src="./logo.png" style="max-height: 31px; float:left;padding: 12px 20px; ">
+	<h1 style="margin:0;font-size: 23px; padding: 10px 150px;font-family:  ">
+	结直肠癌知识图谱 </h1></div>
+    <div id="main" style="margin: 10px auto; width: 1000px; height: calc( 100vh - 100px );  border: 1px solid #CCC; border-radius: 10px;"></div>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('main'));
         option = {
-            title: { text: '结直肠癌诊疗知识图谱' },
+            //title: { text: '结直肠癌知识图谱',textStyle:{fontSize:24},padding:[15,15,15,15]},//标题内边距
             tooltip: {
                 formatter: function (x) {
                     return x.data.des;
                 }
             },
+
+
             series: [
                 {
                     type: 'graph',
                     layout: 'force',
-                    symbolSize: 80,
+                    symbolSize: 65,
                     roam: true,
-                    edgeSymbol: ['circle', 'arrow'],
+                    
                     edgeSymbolSize: [4, 10],
                     edgeLabel: {
                         normal: {
@@ -35,51 +43,58 @@
                             }
                         }
                     },
-                    force: {
-                        repulsion: 2500,
+                    force: {//力引导图基本配置
+                        repulsion: 1700,//节点之间的斥力因子。支持数组表达斥力范围，值越大斥力越大。
+                        gravity : 0.95,//节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。
                         edgeLength: [10, 50]
                     },
-                    draggable: true,
-                    itemStyle: {
+                    draggable: true,//节点是否可拖拽，只在使用力引导布局的时候有用
+                    focusNodeAdjacency : true,//是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点
+                    itemStyle: {//===============图形样式
                         normal: {
-                            color: '#4b565b'
+                            color: '#4b565b',
+                            borderColor : 'rgba(255,215,0,0.5)',//设置图形边框为淡金色,透明度为0.4
+                            borderWidth : 2,//图形的描边线宽。为 0 时无描边。
+                            opacity : 0.99 // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。默认0.5
                         }
                     },
-                    lineStyle: {
+                    lineStyle: {//==========关系边的公用线条样式
                         normal: {
-                            width: 2,
-                            color: '#4b565b'
+                            width: 2
                         }
                     },
                     edgeLabel: {
                         normal: {
-                            show: true,
+                            show: false,//是否显示边的标签
                             formatter: function (x) {
                                 return x.data.name;
                             }
                         }
                     },
-                    label: {
+                    label: {//=============图形上的文本标签
                         normal: {
-                            show: true,
+                            show: true,//是否显示标签
+                            position : 'inside',//标签的位置。['50%', '50%'] [x,y]
                             textStyle: {
+                            	color : '#4b565b', //字体颜色
+                            	fontSize: 12
                             }
                         }
                     },
+
                     data: [
                         {
                             name: '结直肠癌',
                             des: '胃肠道中常见的一种恶性肿瘤',
-                            symbolSize: 100,
+                            symbolSize: 80,
                             itemStyle: {
                                 normal: {
-                                    color: 'brown',
-                                    fontSize:100
+                                    color: '#ef5350'
                                 }
                             }
                         }, {
                             name: '临床表现',
-                            symbolSize: 80,
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
@@ -87,140 +102,398 @@
                             }
                         }, {
                             name: '排便习惯改变',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '大便性状改变',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '腹痛或腹部不适',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '腹部肿块',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '肠梗阻相关症状',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '贫血',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '消瘦',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '低热',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         }, {
                             name: '乏力',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#448AFF'}}
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#82b1ff'}}
                         },{
                             name: '体格检查',
-                            symbolSize: 80,
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
+                        }, {name: '身高',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: '体重',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: '体重指数',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: '体表面积',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: '脉压',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: 'KPS评分',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: 'ECOG评分',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: '收缩压',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
+                        }, {name: '舒张压',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80cbc4'}}
                         }, {
-                            name: '实验室检查',
-                            symbolSize: 80,
+                            name: '专科检查',
+                            symbolSize: 65,
+                            itemStyle: {
+                                normal: {
+                                    color: 'orange'
+                                }
+                            }
+                        }, {name: '腹部肿块 ',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '腹部压痛',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '移动性浊音标志',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '是否有结肠直诊标志',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '肿块肠腔内位置',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '肿块环绕周径比例',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '肿块上缘距肛距离',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '肿块下缘距肛距离',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '肿块活动度',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '指套染血标志',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {name: '盆底结节',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#90a4ae'}}
+                        }, {
+                            name: '实验室检验',
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
                         }, {name: '血常规',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
+                            des: '了解有无贫血',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#66bb6a'}}
+                        }, {name: '白细胞计数',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '中性粒细胞比率',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '淋巴细胞比率',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '单核细胞比率',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '红细胞计数',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '血红蛋白',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '平均血红蛋白浓度',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '血小板比率',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '血小板平均体积',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '血小板分布宽度',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+
                         }, {name: '尿常规',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
-                        }, {name: '大便常规',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
-                        }, {name: '粪便隐血试验',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
-                        }, {name: '生化',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
-                        }, {name: '电解质',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
-                        }, {name: '肝肾功能',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
-                        }, {name: 'CEA',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
-                        }, {name: 'CA19-9',
-                            symbolSize: 60,
-                            itemStyle: {normal: {color: '#4CAF50'}}
+                            des: '观察有无血尿，结合泌尿系影像学检查了解肿瘤是否侵犯泌尿系统',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#66bb6a'}}
+                        }, {name: '尿糖',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '尿胆红素',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '尿酮体',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '尿蛋白',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '尿胆原',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '上皮细胞',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        
+
+                        }, {name: '便常规',
+                            des: '注意有无红细胞、白细胞',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#66bb6a'}}
+                        }, {name: '粪便隐血试验',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '颜色',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '性状',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '外观',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '红细胞-粪便',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '白细胞-粪便',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+
+
+                        }, {name: '生化检查',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#66bb6a'}}
+                        }, {name: '血尿素氮',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '丙氨酸氨基转移酶',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '天门冬氨酸氨基转移酶',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '总胆红素',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '直接胆红素',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '间接胆红素',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+
+
+                        }, {name: '凝血',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#66bb6a'}}
+                        }, {name: '凝血酶原时间',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '活化部分凝血活酶时间',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '凝血酶时间',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+
+
+                        }, {name: '病毒相关检查',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#66bb6a'}}
+                        }, {name: 'EB病毒VCA-IgA的抗体',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '乙型肝炎表面抗原定性',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '乙型肝炎表面抗原定量',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+
+
+                        }, {name: '肿瘤标志物',
+                            des: '结直肠癌患者在诊断、治疗前、评价疗效、随访时必须检测癌胚抗原、肿瘤标志物',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#66bb6a'}}
+                        }, {name: '甲胎蛋白',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '糖类抗原199',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '糖类抗原125',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '糖类抗原153',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '癌胚抗原',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+                        }, {name: '糖类抗原724',symbolSize: 50,itemStyle: {normal: {color: '#f48fb1'}}
+
+
                         }, {
                             name: '内镜检查',
-                            symbolSize: 80,
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
+                        }, {name: '直肠镜',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#29b6f6'}}
+                        }, {name: '乙状结肠镜',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#29b6f6'}}
+                        }, {name: '全结肠镜',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#29b6f6'}}
+                        }, {name: '肿瘤大小',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
+                        }, {name: '息肉数目',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
+                        }, {name: '肿瘤下缘距肛缘距离',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
+                        }, {name: '肿瘤占肠壁',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
+                        }, {name: '肿瘤与周围组织分界',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
+                        }, {name: '是否有息肉标志',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
+                        }, {name: '肠镜能否通过标记',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
+                        }, {name: '肿瘤位置',symbolSize: 50,itemStyle: {normal: {color: '#bdbdbd'}}
                         }, {
                             name: '影像学检查',
-                            symbolSize: 80,
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
+                        }, {name: 'CT',
+                            des:'推荐行胸部/全腹/盆腔CT增强扫描检查',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
+                        }, {name: '检查部位',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                        }, {name: '检查方法',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                        }, {name: '影像所见',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                        }, {name: '初步诊断',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                            
+                        }, {name: 'MR',
+                            des: '推荐MR作为直肠癌常规检查项目',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
+                        }, {name: 'PET-CT',
+                            des: '不推荐常规使用，但对于病情复杂、常规检查无法明确诊断的患者可作为有效的辅助检查。术前检查提示为Ⅲ期以上肿瘤，为推荐使用',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
+                        }, {name: '超声',
+                            des: '推荐直肠腔内超声用于早期直肠癌（T2期及以下）分期诊断',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
+                        }, {name: '主要测值',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+
+                        }, {name: '骨扫描',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
+                        }, {name: '经直肠超声',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
+                        }, {name: '超声描述',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                        }, {name: '超声提示',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                        }, {name: '上消化道造影',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
+                        }, {name: '病变性质',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                        }, {name: '病变大小',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+                        }, {name: '病变位置',symbolSize: 50,itemStyle: {normal: {color: '#8c9eff'}}
+
+                        }, {name: 'X线',
+                            des: '推荐气钡双重X线造影作为筛查及诊断结直肠癌的检查方法，但不能应用于结直肠癌分期诊断',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#bcaaa4'}}
                         }, {
-                            name: '病理组织学检查',
-                            symbolSize: 80,
+                            name: '病理及免疫组化',
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
+                        }, {name: '阳性淋巴结数目',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+                        }, {name: '组织学类型',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+                        }, {name: '转移部位',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+                        }, {name: '病理标本类型',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+                        }, {name: '浸润深度',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+                        }, {name: '血管侵犯标志',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+                        }, {name: '神经侵犯标志',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+                        }, {name: '分化程度',symbolSize: 50,itemStyle: {normal: {color: '#4dd0e1'}}
+
+
                         }, {
-                            name: '开腹或腹腔镜探查术',
-                            symbolSize: 80,
+                            name: '分子诊断',
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
+                        }, {name: '样本类型',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: '检测名称',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: '检测方法',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: 'BRAF基因检测',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: '基因突变标志',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: '微卫星不稳定性',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: '甲基化检测标志',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: 'KRAS突变类型',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
+                        }, {name: 'NRAS突变类型',symbolSize: 50,itemStyle: {normal: {color: '#b3e5fc'}}
                         }, {
                             name: '治疗',
-                            symbolSize: 80,
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
+                        }, {name: '内科治疗',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80deea'}}
+                        }, {name: '内科治疗靶向治疗',symbolSize: 50,itemStyle: {normal: {color: '#c5cae9'}}
+                        }, {name: '内科治疗临床试验',symbolSize: 50,itemStyle: {normal: {color: '#c5cae9'}}
+                        }, {name: '内科治疗化疗',symbolSize: 50,itemStyle: {normal: {color: '#c5cae9'}}
+                        }, {name: '放射治疗',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80deea'}}
+                        }, {name: '手术治疗',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80deea'}}
+                        }, {name: '介入治疗',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#80deea'}}
                         }, {
-                            name: 'TNM分期',
-                            symbolSize: 80,
+                            name: '患者信息',
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
+                        }, {name: '相关疾病史',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#AFB42B'}}
+                        }, {name: '溃疡性结肠炎',symbolSize: 50,itemStyle: {normal: {color: '#cfd8dc'}}
+                        }, {name: '结直肠息肉',symbolSize: 50,itemStyle: {normal: {color: '#cfd8dc'}}
+                        }, {name: '克罗恩病',symbolSize: 50,itemStyle: {normal: {color: '#cfd8dc'}}
+                        }, {name: '血吸虫病',symbolSize: 50,itemStyle: {normal: {color: '#cfd8dc'}}
+                        
+                        }, {name: '相关家族史',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#AFB42B'}}
+                        }, {name: '林奇综合征',symbolSize: 50,itemStyle: {normal: {color: '#9fa8da'}}
+                        }, {name: '家族性肿瘤性息肉病',symbolSize: 50,itemStyle: {normal: {color: '#9fa8da'}}
+                        }, {name: '黑斑息肉综合证',symbolSize: 50,itemStyle: {normal: {color: '#9fa8da'}}
+                        
+                        }, {name: '基本信息',
+                            symbolSize: 50,
+                            itemStyle: {normal: {color: '#AFB42B'}}
+                        }, {name: '姓名',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+                        }, {name: '性别',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+                        }, {name: '年龄',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+                        }, {name: '出生日期',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+                        }, {name: '民族',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+                        }, {name: '联系电话',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+                        }, {name: '户籍地址',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+                        }, {name: '血型',symbolSize: 50,itemStyle: {normal: {color: '#dcedc8'}}
+
                         }, {
-                            name: '解剖分期/预后组别',
-                            symbolSize: 80,
+                            name: 'ICD-10疾病分类',
+                            symbolSize: 65,
                             itemStyle: {
                                 normal: {
                                     color: 'orange'
                                 }
                             }
-                        }
+                        }, {name: '肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#ffe0b2'}}
+                        }, {name: '消化系统疾病',symbolSize: 50,itemStyle: {normal: {color: '#ffe0b2'}}
+                        }, {name: '影响健康状态和与保健机构接触的因素',symbolSize: 50,itemStyle: {normal: {color: '#ffe0b2'}}
+
+                        }, {name: '结肠恶性肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '直肠乙状结肠连接处恶性肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '直肠恶性肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '肛门和肛管的恶性肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '呼吸和消化器官的继发性恶性肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '消化器官其他和未特指的原位癌',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '其他和未特指部位的原位癌',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '结肠、直肠、肛门和肛管良性肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '口腔和消化器官动态未定或动态未知的肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '其他和未特指部位的动态未定或动态未知的肿瘤',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '肛门和直肠区脓肿',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '肠的其他疾病',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '其他医疗照顾',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '医疗个人史',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        }, {name: '其他手术后状态',symbolSize: 50,itemStyle: {normal: {color: '#b39ddb'}}
+                        },
                     ],
                     links: [
                         {
@@ -228,21 +501,23 @@
                         }, {
                         	source: '体格检查',target: '结直肠癌'
                         }, {
-                            source: '实验室检查',target: '结直肠癌'
+                        	source: '专科检查',target: '结直肠癌'
+                        }, {
+                            source: '实验室检验',target: '结直肠癌'
                         }, {
                             source: '内镜检查',target: '结直肠癌'
                         }, {
                             source: '影像学检查',target: '结直肠癌'
                         }, {
-                            source: '病理组织学检查',target: '结直肠癌'
+                            source: '病理及免疫组化',target: '结直肠癌'
                         }, {
-                            source: '开腹或腹腔镜探查术',target: '结直肠癌'
+                            source: '分子诊断',target: '结直肠癌'
                         }, {
                             source: '治疗',target: '结直肠癌'
                         }, {
-                            source: 'TNM分期',target: '结直肠癌'
+                            source: '患者信息',target: '结直肠癌'
                         }, {
-                            source: '解剖分期/预后组别',target: '结直肠癌'
+                            source: 'ICD-10疾病分类',target: '结直肠癌'
                         }, {
                             source: '排便习惯改变',target: '临床表现'
                         }, {
@@ -261,29 +536,156 @@
                             source: '低热',target: '临床表现'
                         }, {
                             source: '乏力',target: '临床表现'
+
+
+
+                        }, {source: '肿瘤',target: 'ICD-10疾病分类'
+                        }, {source: '结肠恶性肿瘤',target: '肿瘤'},{source: '直肠乙状结肠连接处恶性肿瘤',target: '肿瘤'},{source: '直肠恶性肿瘤',target: '肿瘤'},{source: '肛门和肛管的恶性肿瘤',target: '肿瘤'},{source: '呼吸和消化器官的继发性恶性肿瘤',target: '肿瘤'},{source: '消化器官其他和未特指的原位癌',target: '肿瘤'},{source: '其他和未特指部位的原位癌',target: '肿瘤'},{source: '结肠、直肠、肛门和肛管良性肿瘤',target: '肿瘤'},{source: '口腔和消化器官动态未定或动态未知的肿瘤',target: '肿瘤'},{source: '其他和未特指部位的动态未定或动态未知的肿瘤',target: '肿瘤'
+
+                        },{source: '消化系统疾病',target: 'ICD-10疾病分类'
+                        },{source: '肛门和直肠区脓肿',target: '消化系统疾病'},{source: '肠的其他疾病',target: '消化系统疾病'
+
+                        },{source: '影响健康状态和与保健机构接触的因素',target: 'ICD-10疾病分类'
+                        },{source: '其他医疗照顾',target: '影响健康状态和与保健机构接触的因素'},{source: '医疗个人史',target: '影响健康状态和与保健机构接触的因素'},{source: '其他手术后状态',target: '影响健康状态和与保健机构接触的因素'
+
+
                         }, {
-                            source: '血常规',target: '实验室检查'
+                            source: '血常规',target: '实验室检验'
+                        }, {source: '白细胞计数',target: '血常规'},{source: '中性粒细胞比率',target: '血常规'},{source: '淋巴细胞比率',target: '血常规'},{source: '单核细胞比率',target: '血常规'},{source: '红细胞计数',target: '血常规'},{source: '血红蛋白',target: '血常规'},{source: '平均血红蛋白浓度',target: '血常规'},{source: '血小板比率',target: '血常规'},{source: '血小板平均体积',target: '血常规'},{source: '血小板分布宽度',target: '血常规'
+
+
                         }, {
-                            source: '尿常规',target: '实验室检查'
+                            source: '便常规',target: '实验室检验'
+                        }, {source: '粪便隐血试验',target: '便常规'},{source: '颜色',target: '便常规'},{source: '性状',target: '便常规'},{source: '外观',target: '便常规'},{source: '红细胞-粪便',target: '便常规'},{source: '白细胞-粪便',target: '便常规'
+
+
                         }, {
-                            source: '大便常规',target: '实验室检查'
+                            source: '生化检查',target: '实验室检验'
+                        }, {source: '血尿素氮',target: '生化检查'},{source: '丙氨酸氨基转移酶',target: '生化检查'},{source: '天门冬氨酸氨基转移酶',target: '生化检查'},{source: '总胆红素',target: '生化检查'},{source: '直接胆红素',target: '生化检查'},{source: '间接胆红素',target: '生化检查'
                         }, {
-                            source: '粪便隐血试验',target: '实验室检查'
+                            source: '病毒相关检查',target: '实验室检验'
+                        }, {source: 'EB病毒VCA-IgA的抗体',target: '病毒相关检查'},{source: '乙型肝炎表面抗原定性',target: '病毒相关检查'},{source: '乙型肝炎表面抗原定量',target: '病毒相关检查'
+
+
                         }, {
-                            source: '生化',target: '实验室检查'
+                            source: '凝血',target: '实验室检验'
+                        }, {source: '凝血酶原时间',target: '凝血'},{source: '活化部分凝血活酶时间',target: '凝血'},{source: '凝血酶时间',target: '凝血'
+
+
                         }, {
-                            source: '电解质',target: '实验室检查'
+                            source: '肿瘤标志物',target: '实验室检验'
+                        }, {source: '甲胎蛋白',target: '肿瘤标志物'},{source: '糖类抗原199',target: '肿瘤标志物'},{source: '糖类抗原125',target: '肿瘤标志物'},{source: '糖类抗原153',target: '肿瘤标志物'},{source: '癌胚抗原',target: '肿瘤标志物'},{source: '糖类抗原724',target: '肿瘤标志物'
                         }, {
-                            source: '肝肾功能',target: '实验室检查'
+                            source: '尿常规',target: '实验室检验'
+                        }, {source: '尿糖',target: '尿常规'},{source: '尿胆红素',target: '尿常规'},{source: '尿酮体',target: '尿常规'},{source: '尿蛋白',target: '尿常规'},{source: '尿胆原',target: '尿常规'},{source: '上皮细胞',target: '尿常规'
                         }, {
-                            source: 'CEA',target: '实验室检查'
+                            source: '直肠镜',target: '内镜检查'
                         }, {
-                            source: 'CA19-9',target: '实验室检查'
+                            source: '乙状结肠镜',target: '内镜检查'
+                        }, {
+                            source: '全结肠镜',target: '内镜检查'
+                        }, {source: '肿瘤大小',target: '全结肠镜'},{source: '息肉数目',target: '全结肠镜'},{source: '肿瘤下缘距肛缘距离',target: '全结肠镜'},{source: '肿瘤占肠壁',target: '全结肠镜'},{source: '肿瘤与周围组织分界',target: '全结肠镜'},{source: '是否有息肉标志',target: '全结肠镜'},{source: '肠镜能否通过标记',target: '全结肠镜'},{source: '肿瘤位置',target: '全结肠镜'
+                        }, {
+                            source: '内窥镜',target: '内镜检查'
+                        }, {
+                            source: '身高',target: '体格检查'
+                        }, {
+                            source: '体重',target: '体格检查'
+                        }, {
+                            source: '体重指数',target: '体格检查'
+                        }, {
+                            source: '体表面积',target: '体格检查'
+                        }, {
+                            source: '脉压',target: '体格检查'
+                        }, {
+                            source: 'KPS评分',target: '体格检查'
+                        }, {
+                            source: 'ECOG评分',target: '体格检查'
+                        }, {
+                            source: '收缩压',target: '体格检查'
+                        }, {
+                            source: '舒张压',target: '体格检查'
+                        }, {
+                            source: '腹部肿块 ',target: '专科检查'
+                        }, {
+                            source: '腹部压痛',target: '专科检查'
+                        }, {
+                            source: '移动性浊音标志',target: '专科检查'
+                        }, {
+                            source: '是否有结肠直诊标志',target: '专科检查'
+                        }, {
+                            source: '肿块肠腔内位置',target: '专科检查'
+                        }, {
+                            source: '肿块环绕周径比例',target: '专科检查'
+                        }, {
+                            source: '肿块上缘距肛距离',target: '专科检查'
+                        }, {
+                            source: '肿块下缘距肛距离',target: '专科检查' 
+                        }, {
+                            source: '肿块活动度',target: '专科检查'
+                        }, {
+                            source: '指套染血标志',target: '专科检查'  
+                        }, {
+                            source: '盆底结节',target: '专科检查' 
+
+
+                        }, {source: '样本类型',target: '分子诊断'},{source: '检测名称',target: '分子诊断'},{source: '检测方法',target: '分子诊断'},{source: 'BRAF基因检测',target: '分子诊断'},{source: '基因突变标志',target: '分子诊断'},{source: '微卫星不稳定性',target: '分子诊断'},{source: '甲基化检测标志',target: '分子诊断'},{source: 'KRAS突变类型',target: '分子诊断'},{source: 'NRAS突变类型',target: '分子诊断'
+                        }, {
+                            source: 'CT',target: '影像学检查'
+                        }, {source: '检查部位',target: 'CT'},{source: '检查方法',target: 'CT'},{source: '影像所见',target: 'CT'},{source: '初步诊断',target: 'CT'
+                        }, {
+                            source: 'MR',target: '影像学检查' 
+                        }, {source: '检查部位',target: 'MR'},{source: '检查方法',target: 'MR'},{source: '影像所见',target: 'MR'},{source: '初步诊断',target: 'MR'
+                        }, {
+                            source: 'PET-CT',target: '影像学检查' 
+                        }, {source: '检查部位',target: 'PET-CT'},{source: '检查方法',target: 'PET-CT'},{source: '影像所见',target: 'PET-CT'},{source: '初步诊断',target: 'PET-CT' 
+                        }, {
+                            source: '超声',target: '影像学检查'  
+                        }, {source: '主要测值',target: '超声'},{source: '超声描述',target: '超声'},{source: '超声提示',target: '超声'
+                        }, {
+                            source: '骨扫描',target: '影像学检查'  
+                        }, {source: '检查方法',target: '骨扫描'},{source: '影像所见',target: '骨扫描'},{source: '初步诊断',target: '骨扫描'
+                        }, {
+                            source: '经直肠超声',target: '影像学检查'  
+                        }, {source: '检查部位',target: '经直肠超声'},{source: '超声描述',target: '经直肠超声'},{source: '超声提示',target: '经直肠超声'
+                        }, {
+                            source: '上消化道造影',target: '影像学检查'  
+                        }, {source: '病变性质',target: '上消化道造影'},{source: '病变大小',target: '上消化道造影'},{source: '病变位置',target: '上消化道造影'
+                        }, {
+                            source: 'X线',target: '影像学检查'
+                        }, {source: '检查部位',target: 'X线'},{source: '检查方法',target: 'X线'},{source: '影像所见',target: 'X线'},{source: '初步诊断',target: 'X线'
+
+                        }, {
+                            source: '阳性淋巴结数目',target: '病理及免疫组化'}, {source: '组织学类型',target: '病理及免疫组化'},{source: '转移部位',target: '病理及免疫组化'},{source: '病理标本类型',target: '病理及免疫组化'},{source: '浸润深度',target: '病理及免疫组化'},{source: '血管侵犯标志',target: '病理及免疫组化'},{source: '神经侵犯标志',target: '病理及免疫组化'},{source: '分化程度',target: '病理及免疫组化'
+                        }, {
+                            source: '内科治疗',target: '治疗'  
+                        }, {source: '内科治疗靶向治疗',target: '内科治疗'},{source: '内科治疗临床试验',target: '内科治疗'},{source: '内科治疗化疗',target: '内科治疗'
+                        }, {
+                            source: '放射治疗',target: '治疗'  
+                        }, {
+                            source: '手术治疗',target: '治疗'  
+                        }, {
+                            source: '介入治疗',target: '治疗' 
+                        }, {
+                            source: '相关疾病史',target: '患者信息' 
+                        }, {source: '溃疡性结肠炎',target: '相关疾病史'},{source: '结直肠息肉',target: '相关疾病史'},{source: '克罗恩病',target: '相关疾病史'},{source: '血吸虫病',target: '相关疾病史'
+                        }, {
+                            source: '相关家族史',target: '患者信息' 
+                        }, {source: '林奇综合征',target: '相关家族史'},{source: '家族性肿瘤性息肉病',target: '相关家族史'},{source: '黑斑息肉综合证',target: '相关家族史'
+                        }, {
+                            source: '基本信息',target: '患者信息' 
+                        }, {source: '姓名',target: '基本信息'},{source: '性别',target: '基本信息'},{source: '年龄',target: '基本信息'},{source: '出生日期',target: '基本信息'},{source: '民族',target: '基本信息'},{source: '户籍地址',target: '基本信息'},{source: '血型',target: '基本信息'},{source: '联系电话',target: '基本信息'
+                        
                         }]
                 }
             ]
         };
         myChart.setOption(option);
     </script>
+    <!-- 版权信息 -->
+            <div class="copyright-container" style="text-align: center;font-size: 14px">
+                <span>Copyright @ 1997-2019 ZOESOFT. All Rights Reserved. 智业软件 版权所有</span>
+            </div>
+        </div>
 </body>
 </html>
